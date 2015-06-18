@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
-
-class WelcomeController extends Controller {
+// require_once('../app/Http/Controllers/BaseController.php');
+class WelcomeController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -30,8 +30,10 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		// return view('welcome');
-		return 'hello world';
+		$Data = array(
+			'title'=>'Home',
+			);
+		return $this->baseView('welcome',$Data);
 	}
 
 	//CONTACT PAGE

@@ -1,0 +1,33 @@
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Light.ttf);
+}
+/*DEFAULT*/
+hmtl,body{font-family:roboto;margin:0;background-color:#FFF;}
+.box{display: block;color:#FFF;height:100%}
+.box a{color:#fff}
+.box li{list-style: none;padding-left:0;margin-left:0}
+.box h2{font-size:20px;padding-bottom: 14px;margin-top: 0}
+.box h1{text-transform: uppercase;}
+.box-kasir-left{color:#FFF;background-color:#00a7a7;padding-top:10px;padding-bottom:2px;}
+.box-kasir-right{color:gray}
+.box-kasir-veryright{color:gray;}
+.box-form input[type="text"]{border:none}
+.avatar img{width:50px;height:50px;}
+.box-kasir-btn-lg{border-radius: 50px;color:#FFF;background-color:#00a7a7;}
+.btn-circle{border-radius:100px;}
+.box-list tr{cursor:pointer;background-color: #ececec;margin-bottom:5px}
+.box-list tr:hover{background-color: #F2F2F2;}
+.parent-list{height:350px;overflow-y:scroll;}
+/*RESPONSIVE*/
+@media (max-width: @screen-phone-max) {
+	h2{margin-top:0;}
+}
+@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+	h2{margin-top:0;}
+}
+@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+	h2{margin-top:0;}
+}
+@media (min-width: @screen-lg) {
+}

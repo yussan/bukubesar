@@ -1,0 +1,77 @@
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Light.ttf);
+}
+/*DEFAULT*/
+hmtl,body{font-family:roboto;margin:0;background-color:#FFF;}
+nav.header{height: 60px;border-bottom:1px solid lightgray;color:gray;z-index: 200;background-color: #FFF}
+nav.header a{color:gray;}
+nav.header .logo{background-size:contain;gray;width:140px;height: 60px}
+.header a:hover{text-decoration: none;}
+.breadcrumb a{color:lightgray;}
+.fix-header{position:fixed;z-index: 200}
+/*HOME*/
+.home-picture{width:90%;background:#fff;position:absolute;z-index:100}
+.home-picture-top{height:430px;background-image: url('../images/ukm.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;}
+.home-picture-bottom{padding-left:10px;height: 100px;}
+.home-tagline{height:400px;background-color: rgb(239, 239, 239);padding: 15px;}
+.home-line2{height:430px;padding:0;}
+.home-line2-left{padding:110px 50px;color:#FFF;background-color:rgb(111, 202, 236);height:100%}
+.home-line2-right{background-color;lightgray;height:100%;padding:0;background-color: rgb(111, 202, 236);}
+.home-line2-icon{
+  font-size: 45px;
+  padding: 15px;
+  border-radius: 100px;
+}
+.home-footer{padding:10px;}
+.bg-personil .home-line2-icon{background-color: #F9832E;}
+.bg-penjualan .home-line2-icon{background-color: #00BABA;}
+.bg-persediaan .home-line2-icon{background-color: #DA538B;}
+.bg-akuntansi .home-line2-icon{background-color: #56D75D;}
+.home-line3{height:120px;padding:0px;color:#FFF;background-color: #E07B32;}
+.home-line3-left{height:100%;padding:0;cursor:pointer;}
+.home-line3-right{height:100%;padding:0 10px;}
+.bg-personil{height:100%;background-color:#E07B32;}
+.bg-penjualan{background-color:#00a7a7;height:100%;}
+.bg-persediaan{background-color:#c04f7e;height:100%;}
+.bg-akuntansi{background-color:#4FC055;height:100%;}
+/*CASHIER*/
+.box{display: block;color:#FFF;height:100%}
+.box a{color:#fff}
+.box li{list-style: none;padding-left:0;margin-left:0}
+.box h2{font-size:20px;padding-bottom: 14px;margin-top: 0}
+.box h1{text-transform: uppercase;font-size: 31px}
+.box-penjualan-left{color:#FFF;background-color:#00a7a7;padding-top:10px;padding-bottom:2px;}
+.box-penjualan-right{color: rgb(47, 47, 47);}
+.box-penjualan-veryright{color: white;background-color: #616161;}
+.box-form input[type="text"]{border: 1px solid lightgray;}
+.avatar img{width:40px;height:40px;}
+.box-penjualan-btn-lg{padding:6px 10px;border-radius: 50px;color:#FFF;background-color:#00a7a7;}
+.btn-small{padding:1px 5px;}
+.btn-circle{padding:6px 10px;border-radius:100px;}
+.box-list tr{cursor:pointer;background-color: #ececec;margin-bottom:5px}
+.box-list tr:hover{background-color: #F2F2F2;}
+.parent-list{overflow-y: auto;padding-right:10px;}
+.table tr{cursor: pointer}
+.table-penjualan tr{background-color:rgb(236, 236, 236)}
+.table-penjualan tr:hover{background-color:#F4F4F4}
+/*INVENTORY*/
+.box-persediaan-left{color:#FFF;background-color:#c04f7e;padding-top:10px;padding-bottom:2px;}
+.box-persediaan-btn{padding:6px 10px;border-radius: 50px;color:#FFF;background-color:#c04f7e;}
+/*PESONIL*/
+.box-personil-left{color:#FFF;background-color:#E07B32;padding-top:10px;padding-bottom:2px;}
+.box-personil-btn{padding:6px 10px;border-radius: 50px;color:#FFF;background-color:#E07B32;}
+/*TRANSITION*/
+
+/*RESPONSIVE*/
+@media only screen and (min-width:768px) and (max-width:800px){
+	h2{margin-top:0;}
+	.home-picture,.home-nav{display:none;}
+}
+@media only screen and (max-width:767px){
+	h2{margin-top:0;}
+	.home-picture,.home-nav{display:none;}
+}
+@media only screen and (max-width:479px){
+	.home-picture,.home-nav{display:none;}
+}
