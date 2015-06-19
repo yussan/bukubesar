@@ -20,28 +20,28 @@
         <div class="home-line3-left col-md-6">
             <div ng-click="homePresentation('personil')" class="active bg-personil col-xs-3">
                 <center>
-                <small ng-show="downArrowPersonil" style="margin-top:0;margin-bottom:8px" class="glyphicon glyphicon-chevron-down"></small><br/>
+                <small ng-show="downArrowPersonil" style="margin-top:0;margin-bottom:5px" class="glyphicon glyphicon-chevron-down"></small><br/>
                 <span class="home-line2-icon glyphicon glyphicon-user"></span><br/>
                 personil
                 </center>
             </div>   
             <div ng-click="homePresentation('penjualan')" class="bg-penjualan col-xs-3">
                 <center>
-                <small ng-show="downArrowPenjualan" style="margin-top:0;margin-bottom:8px" class="glyphicon glyphicon-chevron-down"></small><br/>
+                <small ng-show="downArrowPenjualan" style="margin-top:0;margin-bottom:5px" class="glyphicon glyphicon-chevron-down"></small><br/>
                 <span class="home-line2-icon glyphicon glyphicon-shopping-cart"></span><br/>
                 penjualan
                 </center>
             </div>   
             <div ng-click="homePresentation('persediaan')" class="bg-persediaan col-xs-3">
                 <center>
-                <small ng-show="downArrowPersediaan" style="margin-top:0;margin-bottom:8px" class="glyphicon glyphicon-chevron-down"></small><br/>
+                <small ng-show="downArrowPersediaan" style="margin-top:0;margin-bottom:5px" class="glyphicon glyphicon-chevron-down"></small><br/>
                 <span class="home-line2-icon glyphicon glyphicon-list-alt"></span><br/>
                 persediaan
                 </center>
             </div>   
             <div ng-click="homePresentation('akuntansi')" class="bg-akuntansi col-xs-3">
                 <center>
-                <small ng-show="downArrowAkuntansi" style="margin-top:0;margin-bottom:8px" class="glyphicon glyphicon-chevron-down"></small><br/>
+                <small ng-show="downArrowAkuntansi" style="margin-top:0;margin-bottom:5px" class="glyphicon glyphicon-chevron-down"></small><br/>
                 <span class="home-line2-icon glyphicon glyphicon-stats"></span><br/>
                 akuntansi
                 </center>
