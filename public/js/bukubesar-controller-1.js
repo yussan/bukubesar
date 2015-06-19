@@ -128,3 +128,7 @@ app.controller('ctrlHome', ['$scope','$timeout',function($scope,$timeout){
 	//auto
 	$scope.homePresentation('personil')
 }])
+//GET STARTED
+app.controller('ctrlGetStarted', ['$scope', function($scope){
+	
+}])

@@ -19,6 +19,7 @@
             </ul>
         </div>
         <div class="col-xs-6">
+            @if (Session::has('userLogin'))[[[-- users logged in --]]]
             <div style="padding:10px" class="pull-right dropdown">
                 <a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img src="images/avatar.jpg" alt="..." class="img-circle"> username <span class="glyphicon glyphicon-menu-down"></span></a>
                 <ul id="dropdown-avatar" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -27,5 +28,10 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Logout</a></li>
                 </ul>
             </div>
+            @else
+            <ul class="pull-right home-nav nav nav-pills">
+              <li role="presentation"><a data-toggle="modal" data-target="#getstarted" href="#getstarted"><strong>Mulai menggunakan</strong>.Register/login</a></li>
+            </ul>
+            @endif
         </div>
     </nav>
