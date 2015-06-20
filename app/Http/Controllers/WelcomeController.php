@@ -36,10 +36,4 @@ class WelcomeController extends BaseController {
 		return $this->baseView('welcome',$Data);
 	}
 
-	//CONTACT PAGE
-	public function contact()
-	{
-		return view('pages.contact');
-	}
-
 }

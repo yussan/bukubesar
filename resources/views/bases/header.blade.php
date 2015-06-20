@@ -19,13 +19,19 @@
             </ul>
         </div>
         <div class="col-xs-6">
-            @if (Session::has('userLogin'))[[[-- users logged in --]]]
+            @if (Session::has('userlogin'))[[[-- users logged in --]]]
+            <?php
+            $sess = Session::get('userlogin');
+            $username = $sess[0]->username;
+            //$username =$sess->username;
+            ?>
             <div style="padding:10px" class="pull-right dropdown">
-                <a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img src="images/avatar.jpg" alt="..." class="img-circle"> username <span class="glyphicon glyphicon-menu-down"></span></a>
+                <a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img src="images/avatar.jpg" alt="..." class="img-circle"> [[$username]] <span class="glyphicon glyphicon-menu-down"></span></a>
                 <ul id="dropdown-avatar" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Edit Profile</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="dashboard">Dashboard</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="dashboard/edit">Edit Profile</a></li>
                     <li class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Logout</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="logout">Logout</a></li>
                 </ul>
             </div>
             @else
