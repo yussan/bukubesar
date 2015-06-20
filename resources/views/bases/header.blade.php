@@ -11,7 +11,7 @@
     <div ng-controller="ctrlHome" scroll class="home">
        
       <nav ng-style="fixHeader" class="header col-xs-12">
-        <div class="col-xs-2"><a href="#"><div class="logo"><h3>BukuBesar<span>.com</span><sup style="top:-2em;font-size:10px">beta</sup></h3></div></a></div>
+        <div class="col-xs-2"><a href="<?php echo url('/', $parameters = [], $secure = null); ?>"><div class="logo"><h3>BukuBesar<span>.me</span><sup style="top:-2em;font-size:10px">beta</sup></h3></div></a></div>
         <div class="col-xs-4">
             <ul class="home-nav nav nav-pills">
               <li role="presentation"><a href="#">Bantuan</a></li>
@@ -23,7 +23,6 @@
             <?php
             $sess = Session::get('userlogin');
             $username = $sess[0]->username;
-            //$username =$sess->username;
             ?>
             <div style="padding:10px" class="pull-right dropdown">
                 <a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img src="images/avatar.jpg" alt="..." class="img-circle"> [[$username]] <span class="glyphicon glyphicon-menu-down"></span></a>

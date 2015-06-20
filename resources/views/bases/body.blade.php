@@ -1,3 +1,3 @@
-@extends('bases/footer')
-@extends($ChildView)
-@extends('bases/header')
+@include('bases/header')
+@include($ChildView)
+@include('bases/footer')

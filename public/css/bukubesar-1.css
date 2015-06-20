@@ -36,7 +36,7 @@ nav.header .logo{background-size:contain;gray;width:140px;height: 60px}
 .bg-persediaan{background-color:#c04f7e;height:100%;}
 .bg-akuntansi{background-color:#4FC055;height:100%;}
 /*CASHIER*/
-.box{display: block;color:#FFF;height:100%}
+.box{display: block;color: #41474D;height:100%}
 .box a{color:#fff}
 .box li{list-style: none;padding-left:0;margin-left:0}
 .box h2{font-size:20px;padding-bottom: 14px;margin-top: 0}

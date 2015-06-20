@@ -11,6 +11,9 @@ class DashboardController extends BaseController {
 	{
 		//user not logged in
 		if(Session::has('userlogin')==false){return redirect('/');}
-		
+		$Data = array(
+			'title'=>'Dashboard',
+			);
+		return $this->baseView('dashboard.index',$Data);
 	}
 }

@@ -45,7 +45,7 @@ app.controller('ctrlKasir',['$scope','$http','$location','$window','$timeout',
 
 	}]);
 //INVENTORY CONTROLLER
-app.controller('ctrlInventoriBarang',['$scope','$window',
+app.controller('ctrlPersediaanBarang',['$scope','$window',
 	function($scope,$window){
 		//STYLING
 		var heightDoc = $window.innerHeight;//get document height
@@ -54,7 +54,7 @@ app.controller('ctrlInventoriBarang',['$scope','$window',
 		//BUTTON ACTION
 		$scope.showSearch = function()
 		{
-			$scope.search =$scope.search === false ? true :false
+			$scope.search=$scope.search === false ? true :false
 		};
 		//ADD ITEM
 		$scope.showAdd = function()
