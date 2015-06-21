@@ -6,7 +6,8 @@ app.directive('scroll',function($window)
 	{
 		angular.element($window).bind('scroll',function()
 		{
-			if (this.pageYOffset >= 130) {
+			// if (this.pageYOffset == 130) {
+			if (true ) {
 				scope.fixHeader={'position':'fixed','z-index':'200'};
 				// console.log('bye header');
 			} else {

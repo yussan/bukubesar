@@ -18,6 +18,9 @@ class Usaha extends Migration {
 				$table->bigIncrements('idUsaha');
 				$table->bigInteger('idUser')->unsigned();
 				$table->foreign('idUser')->references('idUser')->on('user')->onDelete('cascade');
+				$table->dateTime('tglBerdiriUsaha');
+				$table->dateTime('tglBuatUsaha');
+				$table->timestamp('tglUpdateUsaha',50);
 				$table->string('kategoriUsaha',50);
 				$table->string('namaUsaha',200);
 				$table->string('alamatUsaha',500);

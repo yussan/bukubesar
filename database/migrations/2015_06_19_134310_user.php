@@ -16,10 +16,11 @@ class User extends Migration {
 			{
 			 	$table->engine = 'InnoDB';
 				$table->bigIncrements('idUser');
+				$table->dateTime('tglRegister');
 				$table->string('username', 20)->unique();
 				$table->text('password');
-				$table->string('facebookId', 200)->unique()->nullable();
-				$table->string('gplusId', 200)->unique()->nullable();
+				$table->string('facebookId', 200)->nullable();
+				$table->string('gplusId', 200)->nullable();
 				$table->string('email',50)->unique()->nullable();
 				$table->string('avatar',100)->nullable();
 				$table->string('namaUser',100);

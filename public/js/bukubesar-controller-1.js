@@ -156,3 +156,23 @@ app.controller('ctrlGetStarted', ['$scope','$http','$window',function($scope,$ht
 		}
 	};
 }])
+//CTRL USAHA
+app.controller('ctrlUsaha',['$scope','$window',
+	function($scope,$window){
+		//STYLING
+		var heightDoc = $window.innerHeight;//get document height
+		$scope.search = true;
+		$scope.sidebarLeft = {"height":heightDoc,"position":"fixed","background":"rgb(111, 202, 236)"};//change left sidebar stye
+		//BUTTON ACTION
+		$scope.showSearch = function()
+		{
+			$scope.search =$scope.search === false ? true :false
+		};
+		//ADD ITEM
+		$scope.showAdd = function()
+		{
+			$scope.modalTitle = 'Tambah Barang';
+			$scope.modalContent = 'Konten Modal';
+			$('#myModal').modal('show');
+		}
+	}]);

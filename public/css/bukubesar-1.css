@@ -35,9 +35,12 @@ nav.header .logo{background-size:contain;gray;width:140px;height: 60px}
 .bg-penjualan{background-color:#00a7a7;height:100%;}
 .bg-persediaan{background-color:#c04f7e;height:100%;}
 .bg-akuntansi{background-color:#4FC055;height:100%;}
+.box-all-left{color:#FFF;background-color:rgb(111, 202, 236);padding-top:10px;padding-bottom:2px;}
+.box-select{background-color:transparent;}
 /*CASHIER*/
 .box{display: block;color: #41474D;height:100%}
 .box a{color:#fff}
+.unbox a{color:gray}.unbox a:hover{text-decoration: none}
 .box li{list-style: none;padding-left:0;margin-left:0}
 .box h2{font-size:20px;padding-bottom: 14px;margin-top: 0}
 .box h1{text-transform: uppercase;font-size: 31px}

@@ -1,11 +1,10 @@
 <?php 
 namespace App\Http\Controllers;
 use Session;
-use Model;
 class BaseController extends Controller {
+	private $user;
 	public function __construct()
 	{
-
 	}
 	#BASE PUBLIC VIEW
 	public function baseView($Childview,$Data)

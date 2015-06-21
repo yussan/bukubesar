@@ -31,11 +31,5 @@
 	</div>
 </div>
 <!-- end of login modal -->
-<script src="js/jquery.min.js"></script>
-<script src="js/angular.min.js"></script>
-<script src="js/angular-route.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bukubesar-controller-1.js"></script>
-<script src="js/bukubesar-directive-1.js"></script>
 </body>
 </html>
