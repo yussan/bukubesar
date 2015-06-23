@@ -5,13 +5,11 @@ use Crypt;
 use App\Models\User;
 use App\Models\Usaha;
 use App\Models\Item;
+use App\Models\Personil;
 class DashboardController extends BaseController {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->M_user = new User;
-		$this->M_usaha = new Usaha;
-		$this->M_item = new Item;
 	}
 	#INDEX PAGE - NOTIFICATION - STATS
 	public function index()
@@ -44,5 +42,21 @@ class DashboardController extends BaseController {
 			);
 		//get detail usaha
 		return $this->baseView('dashboard.usaha',$Data);
+	}
+	#MANAJEMEN PERSONIL
+	public function personil($encidusaha)
+	{
+		//decrypt
+		$idusaha = str_replace('','=',Crypt::decrypt($encidusaha));//worked
+		$usaha = $this->M_usaha->detail($idusaha);
+		//GET LIST
+		if(empty($_GET['status']))$_GET['status']='';
+		$personil = $this->M_personil->getPersonil($idusaha,$_GET['status']);
+		$Data = array(
+			'title'=>'Personil '.$usaha[0]->namaUsaha,
+			'usaha'=>$usaha[0],
+			'personil'=>$personil
+		);
+		return $this->baseView('dashboard.personil.list',$Data);
 	}
 }

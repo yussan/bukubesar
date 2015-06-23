@@ -10,6 +10,7 @@
     <script src="[[url()]]/js/jquery.min.js"></script>
     <script src="[[url()]]/js/angular.min.js"></script>
     <script src="[[url()]]/js/angular-route.min.js"></script>
+    <script src="[[url()]]/js/angular-sanitize.js"></script>
     <script src="[[url()]]/js/bootstrap.min.js"></script>
     <script src="[[url()]]/js/bukubesar-controller-1.js"></script>
     <script src="[[url()]]/js/bukubesar-directive-1.js"></script>

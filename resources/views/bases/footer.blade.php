@@ -22,7 +22,7 @@
 						<div ng-hide="successdiv" class="alert alert-success alert-dismissible fade in" role="alert">{{successmessage}}</div>
 						<button type="button" data-toggle="tooltip" data-placement="bottom" title="register" class="btn btn-lg btn-default btn-circle"><span class="glyphicon glyphicon-plus"></span></button>
 						<button type="submit" data-toggle="tooltip" data-placement="bottom" title="Login" class="btn btn-lg btn-primary btn-circle"><span class="glyphicon glyphicon-log-in"></span></button>
-						<img ng-hide="loader" style="width:40px" src="images/system/loader.gif">
+						<img ng-hide="loader" style="width:40px" src="[[url('images/system/loader.gif')]]">
 					</center>
 				</form>
 			</div>

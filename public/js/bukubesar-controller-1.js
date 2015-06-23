@@ -1,10 +1,12 @@
 // ANGULAR
-var app = angular.module('appBukuBesar',['ngRoute']);//angular initialize
+var app = angular.module('appBukuBesar',['ngRoute','ngSanitize']);//angular initialize
+var rooturl = 'http://'+window.location.host+'/ajax'; 
 //HOME CONTROLLER
 app.controller('ctrlHome',['$scope',
 	function(){
 		
 	}]);
+
 //CASHIER CONTROLLER
 app.controller('ctrlKasir',['$scope','$http','$location','$window','$timeout',
 	function($scope,$http,$location,$window,$timeout){
@@ -55,26 +57,6 @@ app.controller('ctrlPersediaanBarang',['$scope','$window',
 		$scope.showSearch = function()
 		{
 			$scope.search=$scope.search === false ? true :false
-		};
-		//ADD ITEM
-		$scope.showAdd = function()
-		{
-			$scope.modalTitle = 'Tambah Barang';
-			$scope.modalContent = 'Konten Modal';
-			$('#myModal').modal('show');
-		}
-	}]);
-//PERSONIL LIST
-app.controller('ctrlPersonilList',['$scope','$window',
-	function($scope,$window){
-		//STYLING
-		var heightDoc = $window.innerHeight;//get document height
-		$scope.search = true;
-		$scope.sidebarLeft = {"height":heightDoc,"position":"fixed"};//change left sidebar stye
-		//BUTTON ACTION
-		$scope.showSearch = function()
-		{
-			$scope.search =$scope.search === false ? true :false
 		};
 		//ADD ITEM
 		$scope.showAdd = function()

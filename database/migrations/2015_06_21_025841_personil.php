@@ -21,6 +21,9 @@ class Personil extends Migration {
 				$table->bigInteger('idUsaha')->unsigned();
 				$table->foreign('idUsaha')->references('idUsaha')->on('usaha')->onDelete('cascade');
 				$table->enum('statusPersonil', ['penjualan', 'persediaan','akuntansi']);
+				$table->dateTime('lastLoginPersonil');
+				$table->string('lastActivityPersonil',300);
+				$table->text('activitiesPersonil');
 			});
 	}
 
