@@ -2,14 +2,14 @@
 namespace App\Http\Controllers;
 use Session;
 use Crypt;
-use App\Models\User;
-use App\Models\Usaha;
-use App\Models\Item;
-use App\Models\Personil;
 class DashboardController extends BaseController {
 	public function __construct()
 	{
 		parent::__construct();
+	}
+	public function onlyMember()
+	{
+		if(Session::has('userlogin')==false){return redirect('/');}
 	}
 	#INDEX PAGE - NOTIFICATION - STATS
 	public function index()
@@ -26,6 +26,7 @@ class DashboardController extends BaseController {
 	#MANAJEMEN USAHA
 	public function usaha($encidusaha)
 	{
+		if(Session::has('userlogin')==false){return redirect('/');}
 		//decrypt
 		$idusaha = str_replace('','=',Crypt::decrypt($encidusaha));//worked
 		$usaha = $this->M_usaha->detail($idusaha);
@@ -46,6 +47,7 @@ class DashboardController extends BaseController {
 	#MANAJEMEN PERSONIL
 	public function personil($encidusaha)
 	{
+		$this->onlyMember();
 		//decrypt
 		$idusaha = str_replace('','=',Crypt::decrypt($encidusaha));//worked
 		$usaha = $this->M_usaha->detail($idusaha);
@@ -58,5 +60,10 @@ class DashboardController extends BaseController {
 			'personil'=>$personil
 		);
 		return $this->baseView('dashboard.personil.list',$Data);
+	}
+	#MANAJEMEN PERSEDIAAN
+	public function persediaan($encidusaha)
+	{
+
 	}
 }

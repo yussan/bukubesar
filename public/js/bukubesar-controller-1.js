@@ -1,13 +1,12 @@
 // ANGULAR
 var app = angular.module('appBukuBesar',['ngRoute','ngSanitize']);//angular initialize
-var rooturl = 'http://'+window.location.host+'/ajax'; 
 //HOME CONTROLLER
 app.controller('ctrlHome',['$scope',
 	function(){
 		
 	}]);
 
-//CASHIER CONTROLLER
+/**CASHIER CONTROLLER**/
 app.controller('ctrlKasir',['$scope','$http','$location','$window','$timeout',
 	function($scope,$http,$location,$window,$timeout){
 	//STYLING
@@ -46,6 +45,8 @@ app.controller('ctrlKasir',['$scope','$http','$location','$window','$timeout',
 	};
 
 	}]);
+/**END OF KASIR CONTROLLER**/
+
 //INVENTORY CONTROLLER
 app.controller('ctrlPersediaanBarang',['$scope','$window',
 	function($scope,$window){

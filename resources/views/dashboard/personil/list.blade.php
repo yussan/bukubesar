@@ -51,7 +51,7 @@
         <div ng-style="styleItemList" class="parent-list">
             <table class="table box-list">
                 <tr ng-repeat="p in personils">
-                    <td ng-click="activitiesPersonil(p.idPersonil,p.namaUser)" style="width:40px"><a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img src="{{rootdir+'/images/avatar/'+p.avatar}}" alt="..." class="img-circle"></a></td>
+                    <td ng-click="activitiesPersonil(p.idPersonil,p.namaUser)" style="width:40px"><a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img ng-src="{{rootdir+'/images/avatar/'+p.avatar}}" alt="..." class="img-circle"></a></td>
                     <td ng-click="activitiesPersonil(p.idPersonil,p.namaUser)">{{p.username}}<br/>{{p.namaUser}}</td>
                     <td ng-click="activitiesPersonil(p.idPersonil,p.namaUser)"><strong>Bag</strong><br/>{{p.statusPersonil}}</td>
                     <td ng-click="activitiesPersonil(p.idPersonil,p.namaUser)"><strong>Terakhir Login</strong><br/>{{p.lastLoginPersonil}}</td>
@@ -100,16 +100,32 @@
                 <div ng-hide="searchloader" class="alert alert-warning">loading...</div>
                 <table class="table box-list">
                 <tr ng-repeat="s in searchresults">
-                    <td style="width:40px"><a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img src="{{rootdir+'/images/avatar/'+s.avatar}}" alt="..." class="img-circle"></a></td>
+                    <td style="width:40px"><a id="link-avatar" class="avatar" data-toggle="dropdown" href="#"><img ng-src="{{rootdir+'/images/avatar/'+s.avatar}}" alt="..." class="img-circle"></a></td>
                     <td {{s.username}}<br/>{{s.username}}</td>
                     <td style="width:50px">
-                        <a style="padding:1px 5px" data-toggle="tooltip" data-placement="bottom" title="reset data transaksi" class="btn-small btn btn-circle btn-primary" href="#"><span  class="glyphicon glyphicon-plus"></span></a> 
+                        <button ng-click="showBagian(s.idUser)" style="padding:1px 5px" data-toggle="tooltip" data-placement="bottom" title="tambah sebagai personil" class="btn-small btn btn-circle btn-primary" href="#"><span  class="glyphicon glyphicon-plus"></span></button> 
                         <br/>
                     </td>
                 </tr>
                 </table>
             </div>
-            <div class="modal-footer"><a style="color:gray" href="#">cara penggunaan</a></div>
+            <div class="modal-footer"><a target="_blank" style="color:gray" href="#">cara penggunaan</a></div>
+        </div>
+    </div>
+</div>
+
+<!-- PERSONIL BAGIAN APA -->
+<div class="modal fade" id="bagianModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div style="color:gray" class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Pilih Bagian</h4>
+            </div>
+            <div style="max-height:350px;overflow-y: scroll;" class="modal-body">
+                <p>pilih bagian untuk</p>
+                <div compile="htmlbagian"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -118,92 +134,6 @@
 
 <!-- ANGULAR -->
 <script type="text/javascript">
-    //PERSONIL LIST
-app.controller('ctrlPersonilList',['$scope','$window','$location','$http','$sce','$timeout',
-    function($scope,$window,$location,$http,$sce,$timeout){
-        var rootdir = $scope.rootdir = '[[url()]]';
-        var idusaha = [[$usaha->idUsaha]];
-        //STYLING
-        var heightDoc = $window.innerHeight;//get document height
-        $scope.search = true;
-        $scope.sidebarLeft = {"height":heightDoc,"position":"fixed"};//change left sidebar stye
-        //BUTTON ACTION
-        $scope.showSearch = function()
-        {
-            $scope.search =$scope.search === false ? true :false
-        };
-        //ADD ITEM
-        $scope.showAdd = function()
-        {
-            $scope.searchloader=true;
-            $('#addModal').modal('show');
-        }
-        //PERSONIL LIST
-        $scope.listPersonil = function(status)
-        {
-            $scope.errordiv = true;$scope.loader = false;
-            if(!status){status = '';}
-            var url = rootdir+'/ajax/personil/list?type=json&status='+status;
-            var ajax = $http.post(url,{idusaha:idusaha});
-            ajax.success(function(json){
-                if(json.length > 0){$scope.loader=true;}else{$scope.loader=true;$scope.errordiv=false;$scope.errormessage="tidak punya personil";}
-                $scope.total = 'Total : '+json.length;
-                $scope.personils=json;
-            });
-            ajax.error(function(){$scope.loader=true;alert('terjadi masalah');});
-        }
-        //SHOW PERSONIL ACTIVITIES
-        $scope.activitiesPersonil = function(idpersonil,nama)
-        {
-            var host = $location.host();
-            var port = $location.port();
-            var url = rootdir+'/ajax/personil/activities';
-            var req = $http.post(url,{idpersonil:idpersonil});
-            req.success(function(response){
-                console.log(response);
-                //modal show
-                $scope.modalTitle = 'Aktifitas '+nama;
-                $scope.modalContent = 'maksimal 100 aktifitas';
-                $scope.activities = response;
-                $('#myModal').modal('show');
-                $scope.modalBody = '';
-                $scope.modalFooter ='<a data-toggle="tooltip" title="simpan" class="btn btn-primary btn-circle"><span class="glyphicon glyphicon-save"></span></a>';
-                });
-            req.error(function(){alert('terjadi masalah');});
-        }
-        //SEARCH PERSONIL
-        $scope.searchPersonil = function()
-        {
-            $timeout(function()
-            {
-                $scope.searchkey = $scope.keyword;
-                var keyword = $scope.keyword;
-                $scope.keyword = keyword;
-                if(!keyword){$scope.searchloader = true;}
-                else{
-                    //start do search
-                    var url = rootdir+'/ajax/personil/search?q='+keyword;
-                    var ajax = $http.get(url);
-                    ajax.success(function(response){
-                        if(response.length != 0){$scope.searchloader=true;}
-                        else{$scope.searchloader=true;$scope.searchkey="username tidak ditemukan";}                        
-                        //results list
-                        $scope.searchresults = response;
-                    });
-                    ajax.error(function(){$scope.searchloader=true;alert('terjadi masalah');});
-                }
-            },1500);
-        }
-        //DELETE PERSONIL
-        $scope.deletePersonil = function(idpersonil)
-        {
-            var agree = confirm('Anda yakin!');
-            if(agree == true)
-            {
-                alert(idpersonil);
-            }
-        }
-        //AUTO LOAD
-        $scope.listPersonil('');
-    }]);
+    var idusaha = [[$usaha->idUsaha]];
 </script>
+<script type="text/javascript" src="[[url('js/bukubesar-personil-controller-1.js')]]"></script>

@@ -20,9 +20,4 @@ class BaseController extends Controller {
 		$Data['ChildView'] = $Childview;
 		return view('bases.body', $Data);
 	}
-	#ONLY MEMBER CAN'T ACCESS
-	public function onlyMember()
-	{
-		if(Session::has('userlogin')==false){return redirect('/');}//login page
-	}
 }

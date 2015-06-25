@@ -1,6 +1,6 @@
 <?php 
 namespace App\Http\Controllers;
-use DB;use Session;
+use DB;use Session;use Crypt;
 use App\Models\User;use App\Models\Usaha;use App\Models\Item;use App\Models\Personil;
 class AjaxController extends BaseController {
 	public function __construct()
@@ -86,6 +86,56 @@ class AjaxController extends BaseController {
         	->get();
         $activities = $activities[0]->activitiesPersonil;
         return $activities;
+	}
+	#SHOW BAGIAN PERSONIL
+	public function personilBagian()
+	{
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata);
+        $idusaha = $data->idusaha;
+		$iduser = $data->iduser;
+		switch ($_GET['act']) {
+			case 'show':
+				//get button view
+				$status = array('penjualan','persediaan','akuntansi');
+				$icon = array('glyphicon-shopping-cart','glyphicon-list-alt','glyphicon-stats');//glyphicon
+				$class = array();
+				//check is my personil
+				echo '<div class="text-center col-md-12 personil-bagian"><div ng-hide="loader" class="alert alert-warning">loading...</div>';
+				for($i=0;$i<3;$i++)
+				{
+					$personilstatus = $this->M_personil->cekStatus($idusaha,$iduser,$status[$i]);
+					if($personilstatus){$class='active';}else{$class='nonactive';}
+					echo '<div class="col-md-4"><button ng-click="actionBagian('.$iduser.',\''.$status[$i].'\')" class="'.$class.' btn btn-default btn-circle"><span style="font-size:25px" class="glyphicon '.$icon[$i].'"></span></button><br/>'.$status[$i].'<br/><small>status "'.$class.'" klik untuk merubah</small></div>';
+				}
+				echo '</div>';
+				break;
+			case 'action':
+				$bagian = $data->bagian;
+				$sessiondata = Session::get('userlogin');
+				$myid=$sessiondata[0]->idUser;
+				if($iduser != $myid):
+					$status = $this->M_personil->changeStatus($idusaha,$iduser,$bagian);
+					if($status == true)
+					{
+						DB::table('personil')
+							->where('personil.idusaha','=',$idusaha)
+							->where('personil.iduser','=',$iduser)
+							->where('personil.statusPersonil','=',$bagian)
+							->delete();
+					}else
+					{
+						DB::table('personil')
+							->insert(
+								['idUser'=>$iduser,'idUsaha'=>$idusaha,'statusPersonil'=>$bagian,'lastLoginPersonil'=>date('Y-m-d H:i:s'),
+								'lastActivityPersonil'=>'','activitiesPersonil'=>'[]']
+								);
+					}
+					break;
+				else:
+					echo 'pemilik usaha bisa akses semua bagian';
+				endif;
+		}
 	}
 
 	//AKUNTANSI

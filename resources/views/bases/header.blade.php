@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="[[url('css/bukubesar-1.css')]]" media="screen"> 
     <style type="text/css">td{vertical-align: center}</style>
     <!-- script -->
+    <script type="text/javascript">var rootweb = '[[url()]]';</script>
     <script src="[[url()]]/js/jquery.min.js"></script>
     <script src="[[url()]]/js/angular.min.js"></script>
     <script src="[[url()]]/js/angular-route.min.js"></script>
