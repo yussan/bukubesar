@@ -21,7 +21,7 @@ class Item extends Migration {
 				$table->foreign('idUsaha')->references('idUsaha')->on('usaha')->onDelete('cascade');
 				$table->string('kodeBarang',200);
 				$table->string('merek',200);
-				$table->string('kategori',200);
+				$table->string('tagItem',200);
 				$table->integer('stok');
 				$table->integer('hargaProduksi');
 				$table->integer('untung');

@@ -1,0 +1,9 @@
+--PERSONIL
+-update ng-repeat list afer action
+-search and show form ng-repeat
+
+--PENJUALAN
+
+--PERSEDIAAN
+
+--AKUNTANSI

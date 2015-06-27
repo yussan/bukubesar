@@ -53,13 +53,32 @@ class Personil extends Model {
 	#UBAH STATUS PERSONIL
 	public function changeStatus($idusaha,$iduser,$bagian)
 	{
-		$query = Db::table('personil')
+		$query = DB::table('personil')
 			->where('personil.idUser','=',$iduser)
 			->where('personil.idUsaha','=',$idusaha)
 			->where('personil.statusPersonil','=',$bagian)
 			->get();
 		if(count($query)>0){$status = true;}//found -> do delete
 		else{$status = false;}//not found -> do insert
+		return $status;
+	}
+	#CEK STATUS PERSONIL
+	public function statusPersonil($iduser,$idusaha)
+	{
+		//apakah pemilik
+		$query = DB::table('usaha')
+			->where('idUser','=',$iduser)
+			->where('idUsaha','=',$idusaha)
+			->get();
+		if(count($query)>0){$status = 'pemilik';}//found -> do delete
+		else{
+			$query = DB::table('personil')
+			->where('personil.idUser','=',$iduser)
+			->where('personil.idUsaha','=',$idusaha)
+			->get();
+			if(count($query)>0){$status = $query[0]->statusPersonil;}//found -> do delete
+			else{$status = false;}//not found -> do insert
+		}	
 		return $status;
 	}
 }

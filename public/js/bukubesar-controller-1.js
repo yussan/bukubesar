@@ -47,26 +47,6 @@ app.controller('ctrlKasir',['$scope','$http','$location','$window','$timeout',
 	}]);
 /**END OF KASIR CONTROLLER**/
 
-//INVENTORY CONTROLLER
-app.controller('ctrlPersediaanBarang',['$scope','$window',
-	function($scope,$window){
-		//STYLING
-		var heightDoc = $window.innerHeight;//get document height
-		$scope.search = true;
-		$scope.sidebarLeft = {"height":heightDoc,"position":"fixed"};//change left sidebar stye
-		//BUTTON ACTION
-		$scope.showSearch = function()
-		{
-			$scope.search=$scope.search === false ? true :false
-		};
-		//ADD ITEM
-		$scope.showAdd = function()
-		{
-			$scope.modalTitle = 'Tambah Barang';
-			$scope.modalContent = 'Konten Modal';
-			$('#myModal').modal('show');
-		}
-	}]);
 //HOME
 app.controller('ctrlHome', ['$scope','$timeout',function($scope,$timeout){
 	$scope.fixHeader = true;
@@ -140,8 +120,9 @@ app.controller('ctrlGetStarted', ['$scope','$http','$window',function($scope,$ht
 	};
 }])
 //CTRL USAHA
-app.controller('ctrlUsaha',['$scope','$window',
-	function($scope,$window){
+app.controller('ctrlUsaha',['$scope','$window','$http',
+	function($scope,$window,$http){
+		$scope.loader = true;
 		//STYLING
 		var heightDoc = $window.innerHeight;//get document height
 		$scope.search = true;
@@ -157,5 +138,25 @@ app.controller('ctrlUsaha',['$scope','$window',
 			$scope.modalTitle = 'Tambah Barang';
 			$scope.modalContent = 'Konten Modal';
 			$('#myModal').modal('show');
-		}
+		};
+		//GOTO SECURE PAGE
+		$scope.securePage = function(location)
+		{	
+			$scope.page = location;
+			$('#securePageModal').modal('show');
+		};
+		//CHECK SECURE PAGE PASSWORD
+		$scope.checkSecurePage = function(location)
+		{
+			$scope.loader = false;
+			var password = $scope.password;
+			var url = rootweb+'/ajax/security/passwordchecker'; 
+			var ajax = $http.post(url,{password:password});
+			ajax.success(function(response)
+				{
+					$scope.loader = true;
+					$window.location = $scope.page;
+				});
+			ajax.error(function(){$scope.loader = true;alert('terjadi masalah');});
+		};
 	}]);

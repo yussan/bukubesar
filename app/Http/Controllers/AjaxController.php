@@ -1,6 +1,6 @@
 <?php 
 namespace App\Http\Controllers;
-use DB;use Session;use Crypt;
+use DB;use Session;
 use App\Models\User;use App\Models\Usaha;use App\Models\Item;use App\Models\Personil;
 class AjaxController extends BaseController {
 	public function __construct()
@@ -36,6 +36,11 @@ class AjaxController extends BaseController {
 			//start set session
 			Session::put('userlogin', $query);
 		}else{return 0;}
+	}
+	//PASSWORD CHECKER
+	public function checkPassword()
+	{
+		return 1;//return true else {..}
 	}
 	//PENJUALAN
 
@@ -136,6 +141,18 @@ class AjaxController extends BaseController {
 					echo 'pemilik usaha bisa akses semua bagian';
 				endif;
 		}
+	}
+	//PERSEDIAAN
+	#PERSEDIAAN LIST
+	public function persediaanList()
+	{
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata);
+        $idusaha = $data->idusaha;
+        $tag = $data->tag;
+        $item = $this->M_persediaan->getItems($idusaha,$tag);
+        // print_r($item);//get items list
+        return json_encode($item);
 	}
 
 	//AKUNTANSI

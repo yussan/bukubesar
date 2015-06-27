@@ -26,9 +26,11 @@ class DashboardController extends BaseController {
 	#MANAJEMEN USAHA
 	public function usaha($encidusaha)
 	{
+		$sessiondata = Session::get('userlogin');
+		$iduser = $sessiondata[0]->idUser;
 		if(Session::has('userlogin')==false){return redirect('/');}
 		//decrypt
-		$idusaha = str_replace('','=',Crypt::decrypt($encidusaha));//worked
+		$idusaha = str_replace('','=',base64_decode(base64_decode($encidusaha)));//worked
 		$usaha = $this->M_usaha->detail($idusaha);
 		$Data = array(
 			'title'=> $usaha[0]->namaUsaha,
@@ -40,6 +42,8 @@ class DashboardController extends BaseController {
 			'totMerek'=>$this->M_item->totalMerek($idusaha),
 			'totStok'=>$this->M_item->totalStok($idusaha),
 			'totHP'=>$this->M_item->totalHargaJual($idusaha),
+			//status personil
+			'status'=> $this->M_personil->statusPersonil($iduser,$idusaha)
 			);
 		//get detail usaha
 		return $this->baseView('dashboard.usaha',$Data);
@@ -49,7 +53,7 @@ class DashboardController extends BaseController {
 	{
 		$this->onlyMember();
 		//decrypt
-		$idusaha = str_replace('','=',Crypt::decrypt($encidusaha));//worked
+		$idusaha = str_replace('','=',base64_decode(base64_decode($encidusaha)));//worked
 		$usaha = $this->M_usaha->detail($idusaha);
 		//GET LIST
 		if(empty($_GET['status']))$_GET['status']='';
@@ -63,7 +67,16 @@ class DashboardController extends BaseController {
 	}
 	#MANAJEMEN PERSEDIAAN
 	public function persediaan($encidusaha)
-	{
-
+	{	
+		$this->onlyMember();
+		//decrypt
+		$idusaha = str_replace('','=',base64_decode(base64_decode($encidusaha)));//worked
+		$usaha = $this->M_usaha->detail($idusaha);
+		$Data = array(
+			'title'=>'Persediaan '.$usaha[0]->namaUsaha,
+			'usaha'=>$usaha[0],
+			'tags'=>$this->M_persediaan->getTags($usaha[0]->idUsaha)
+			);
+		return $this->baseView('dashboard.persediaan.list',$Data);
 	}
 }
