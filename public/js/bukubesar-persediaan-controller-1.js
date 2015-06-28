@@ -5,19 +5,25 @@ app.controller('ctrlPersediaanBarang',['$scope','$window','$http',
         $scope.search = $scope.editTags = $scope.alertKosong = true;
         $scope.sidebarLeft = {"height":heightDoc,"position":"fixed"};//change left sidebar stye
         $scope.tags = $scope.persediaanTags = tags;
+        $scope.Math = Math;
         //GET TAGS
         $scope.getTags = function()
         {
-            //
+            //get latest tags
+            var url = rootweb+'/ajax/persediaan/getTags';
+            var ajax = $http.post(url,{idusaha:idusaha});
+            ajax.success(function(response){$scope.tags = response;$scope.$apply;});            
+            ajax.error(function(response){alert('terjadi masalah');});            
         }
         //GET ITEMS
-        $scope.getItems = function()
+        $scope.getItems = function(tag)
         {
+            if(!tag)tag='';
             var url = rootweb+'/ajax/persediaan/list';
-            var ajax = $http.post(url,{idusaha:idusaha,tag:""});
+            var ajax = $http.post(url,{idusaha:idusaha,tag:tag});
             ajax.success(function(response)
                 {
-                    if(response.length == 1){$scope.alertKosong = false;}
+                    if(response.length < 10){$scope.alertKosong = false;}
                     $scope.alertKosong = true;
                     $scope.lists = response;
                 });
@@ -31,13 +37,21 @@ app.controller('ctrlPersediaanBarang',['$scope','$window','$http',
         //ADD ITEM
         $scope.showAdd = function()
         {
-            $scope.modalTitle = 'Tambah Barang';
-            $scope.modalContent = 'Konten Modal';
-            $('#myModal').modal('show');
+            $('#modalTambah').modal('show');
         }
         //UPDATE TAGS
-        $scope.updateTags = function(){alert($scope.persediaanTags);}
+        $scope.actUpdateTags = function(){
+            var tags = $scope.persediaanTags;//get lattest tags
+            url = rootweb+'/ajax/persediaan/addTags';
+            var ajax = $http.post(url,{tags:tags,idusaha:idusaha});
+            ajax.success(function(){
+                alert('tags sudah terupdate');
+                 //update tag list
+                $scope.getTags();
+            });
+            ajax.error(function(){alert('terjadi masalah')});
+
+        }
         //AUTO EXEC AFTER PAGE LOAD
         $scope.getItems();//get items list
-        $scope.getTags();//get tags list
     }]);

@@ -21,7 +21,7 @@ class Persediaan extends Model {
 			return DB::table('item')
 				->join('persediaanTags','item.idUsaha','=','persediaanTags.idUsaha')
 				->where('item.idUsaha','=',$idusaha)
-				->where('persediaanTags.tags','=',$tag)
+				->where('item.tagItem','=',$tag)
 				->get();
 		}else
 		{

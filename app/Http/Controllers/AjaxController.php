@@ -45,6 +45,30 @@ class AjaxController extends BaseController {
 	//PENJUALAN
 
 	//PERSEDIAAN
+	#GET TAGS
+	public function persediaanGetTags()
+	{
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata);
+        $idusaha = $data->idusaha;
+        $query = DB::table('persediaanTags')
+        	->where('idUsaha',$idusaha)
+        	->get();
+        $tags = explode(',',$query[0]->tags);
+        return json_encode($tags);
+	}
+	#ADD TAGS
+	public function persediaanAddTags()
+	{
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata);
+        $tags = $data->tags;
+        $idusaha = $data->idusaha;
+        //update database
+        return DB::table('persediaanTags')
+        	->where('idUsaha',$idusaha)
+        	->update(['tags'=>$tags]);
+	}
 
 	//PERSONIL
 	#PERSONIL LIST

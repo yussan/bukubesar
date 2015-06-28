@@ -26,6 +26,8 @@ Route::post('ajax/personil/showbagian','AjaxController@personilBagian');//show m
 Route::post('ajax/personil/ubahstatus','AjaxController@personilBagian');//ubah status personil
 #AJAX FOR PERSEDIAAN
 Route::post('ajax/persediaan/list','AjaxController@persediaanList');//get list persediaan
+Route::post('ajax/persediaan/addTags','AjaxController@persediaanAddTags');//add tags
+Route::post('ajax/persediaan/getTags','AjaxController@persediaanGetTags');//get latest tags
 #AJAX FOR ADMIN
 
 #PAGE FOR PUBLIC
