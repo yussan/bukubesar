@@ -31,4 +31,13 @@ class Persediaan extends Model {
 				->get();
 		}
 	}
+	#SEARCH ITEMS
+	public function searchItems($idusaha,$keyword)
+	{
+		return DB::table('item')
+				->join('persediaanTags','item.idUsaha','=','persediaanTags.idUsaha')
+				->where('item.idUsaha','=',$idusaha)
+				->where('item.merek','like','%'.$keyword.'%')
+				->get();
+	}
 }

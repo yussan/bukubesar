@@ -55,4 +55,14 @@
     <div class="home-tagline col-md-12">
         <br/>
         <center><h3>BukuBesar terus memotivasi agar usahamu terus aktif,<br/>lebih baik dan mencapai tujuan yang diinginkan</h3></center>
+        <div class="col-md-offset-4 col-md-4">
+        <br/>
+        <br/>
+        <p>masukan email anda dan dapatkan kabar terbaru dari 'BukuBesar'</p>
+        <form ng-submit="addEmailList()">
+            <input ng-keyup="checkInput()" ng-model="TxtEmail" style="text-align:center" class="form-control input-lg" type="email" placeholder="masukan email anda">
+        </form>
+        <div ng-hide="AlertBox" ng-class="AlertClass"><p style="text-align:center">{{AlertText}}</p></div>
+            
+        </div>
     </div>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PersediaanTags extends Migration {
+class Mailist extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,12 @@ class PersediaanTags extends Migration {
 	 */
 	public function up()
 	{
-		if(!(Schema::hasTable('persediaanTags'))):
-		Schema::create('persediaanTags',function($table)
+		Schema::create('mailist',function($table)
 			{
 				$table->engine = 'InnoDB';
-				$table->bigInteger('idUsaha')->unsigned();
-				$table->string('tags','500');
+				$table->dateTime('addDate');
+				$table->string('email','100')->unique();
 			});
-		endif;
 	}
 
 	/**
@@ -29,7 +27,7 @@ class PersediaanTags extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('PersediaanTags');
+		Schema::drop('mailist');
 	}
 
 }

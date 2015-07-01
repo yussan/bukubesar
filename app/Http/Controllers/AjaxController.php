@@ -42,9 +42,46 @@ class AjaxController extends BaseController {
 	{
 		return 1;//return true else {..}
 	}
-	//PENJUALAN
-
-	//PERSEDIAAN
+	/***HOME***/
+	public function addMail()
+	{
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata);
+        $email = trim($data->email);
+        $exist = DB::table('mailist')->where('email','=',$email)->get();
+        if(count($exist)<=0):
+        	//insert data
+        	DB::table('mailist')
+			->insert(
+				['addDate'=>date('Y-m-d H:i:s'),'email'=>$email]
+				);
+        	return 'success';
+    	else:
+        	return 'email sudah tercatat';
+		endif;
+	}
+	/***PENJUALAN***/
+	/***PERSEDIAAN***/
+	#PERSEDIAAN LIST
+	public function persediaanList()
+	{
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata);
+        $idusaha = $data->idusaha;
+        $tag = $data->tag;
+        $item = $this->M_persediaan->getItems($idusaha,$tag);
+        return json_encode($item);
+	}
+	#PERSEDIAAN SEARCH
+	public function persediaanSearch()
+	{
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata);
+        $idusaha = $data->idusaha;
+        $keyword = $data->keyword;
+        $item = $this->M_persediaan->searchItems($idusaha,$keyword);
+        return json_encode($item);
+	}
 	#GET TAGS
 	public function persediaanGetTags()
 	{
@@ -70,7 +107,7 @@ class AjaxController extends BaseController {
         	->update(['tags'=>$tags]);
 	}
 
-	//PERSONIL
+	/***PERSONIL***/
 	#PERSONIL LIST
 	public function personilList()
 	{
@@ -166,18 +203,5 @@ class AjaxController extends BaseController {
 				endif;
 		}
 	}
-	//PERSEDIAAN
-	#PERSEDIAAN LIST
-	public function persediaanList()
-	{
-		$postdata = file_get_contents("php://input");
-        $data = json_decode($postdata);
-        $idusaha = $data->idusaha;
-        $tag = $data->tag;
-        $item = $this->M_persediaan->getItems($idusaha,$tag);
-        // print_r($item);//get items list
-        return json_encode($item);
-	}
-
 	//AKUNTANSI
 }

@@ -18,6 +18,8 @@ Route::group(['prefix' => 'accounts/{username}'], function()
 Route::post('ajax/security/passwordchecker','AjaxController@checkPassword');//check password when go to secure page
 Route::post('ajax/loginverification','AjaxController@loginverification');//login verification
 Route::post('ajax/setsession','AjaxController@setsession');//set session
+#AJAX FOR HOME
+Route::post('ajax/addmail','AjaxController@addMail');//add mailist
 #AJAX FOR PERSONIL
 Route::post('ajax/personil/activities','AjaxController@personilActivities');//set session
 Route::post('ajax/personil/list','AjaxController@personilList');//set session
@@ -25,9 +27,11 @@ Route::get('ajax/personil/search','AjaxController@personilSearch');//set session
 Route::post('ajax/personil/showbagian','AjaxController@personilBagian');//show modal untuk set bagian
 Route::post('ajax/personil/ubahstatus','AjaxController@personilBagian');//ubah status personil
 #AJAX FOR PERSEDIAAN
-Route::post('ajax/persediaan/list','AjaxController@persediaanList');//get list persediaan
+Route::post('ajax/persediaan/list','AjaxController@persediaanList');//get list item
 Route::post('ajax/persediaan/addTags','AjaxController@persediaanAddTags');//add tags
 Route::post('ajax/persediaan/getTags','AjaxController@persediaanGetTags');//get latest tags
+Route::post('ajax/persediaan/search','AjaxController@persediaanSearch');//search item
+Route::post('ajax/persediaan/processItem','AjaxController@persediaanProcItem');//CRUD an item
 #AJAX FOR ADMIN
 
 #PAGE FOR PUBLIC

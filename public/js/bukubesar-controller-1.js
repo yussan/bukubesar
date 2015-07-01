@@ -1,11 +1,78 @@
 // ANGULAR
 var app = angular.module('appBukuBesar',['ngRoute','ngSanitize']);//angular initialize
-//HOME CONTROLLER
-app.controller('ctrlHome',['$scope',
-	function(){
-		
-	}]);
+//HOME
+app.controller('ctrlHome', ['$scope','$timeout','$http',function($scope,$timeout,$http){
+	$scope.fixHeader = true;
+	$scope.homePresentation = function(param)
+	{
+		switch(param){
+			case 'personil':
+			$scope.downArrowPersonil = true;$scope.downArrowPenjualan = false;$scope.downArrowPersediaan = false;$scope.downArrowAkuntansi = false;
+			$scope.homeh2 = 'manajemen, dokumentasi dan merapikan aktifitas usaha.';
+			$scope.homep = 'Khusus diciptakan untuk UKM(Usaha Kecil Mikro dan Menengah) untuk mengatasi berbagai masalah di bidang personil,penjualan,persediaan dan akuntansi. Data tersimpan di cloud sehingga memudahkan semua personil untuk mengaksesnya.';
+			break;
+			case 'penjualan':
+			$scope.downArrowPersonil = false;$scope.downArrowPenjualan = true;$scope.downArrowPersediaan = false;$scope.downArrowAkuntansi = false;
+			$scope.homeh2 = 'membantu proses penjualan lebih rapi dan tercatat dengan baik.';
+			$scope.homep = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus, sapien ac imperdiet aliquam, felis nulla euismod risus, at consectetur ante est id nulla. Morbi bibendum, dui sit amet pulvinar venenatis, tellus ipsum feugiat erat, placerat lacinia dui lorem malesuada nunc. Etiam congue sed sem et imperdiet.';
+			break;
+			case 'persediaan':
+			$scope.downArrowPersonil = false;$scope.downArrowPenjualan = false;$scope.downArrowPersediaan = true;$scope.downArrowAkuntansi = false;
+			$scope.homeh2 = 'mengetahui persedian yang ada dan pemberitahuan untuk stok yang hampir habis.';
+			$scope.homep = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus, sapien ac imperdiet aliquam, felis nulla euismod risus, at consectetur ante est id nulla. Morbi bibendum, dui sit amet pulvinar venenatis, tellus ipsum feugiat erat, placerat lacinia dui lorem malesuada nunc. Etiam congue sed sem et imperdiet.';
+			break;
+			case 'akuntansi':
+			$scope.downArrowPersonil = false;$scope.downArrowPenjualan = false;$scope.downArrowPersediaan = false;$scope.downArrowAkuntansi = true;
+			$scope.homeh2 = 'memberikan laporan yang valid untuk menentukan rencana kedepan usaha anda.';
+			$scope.homep = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus, sapien ac imperdiet aliquam, felis nulla euismod risus, at consectetur ante est id nulla. Morbi bibendum, dui sit amet pulvinar venenatis, tellus ipsum feugiat erat, placerat lacinia dui lorem malesuada nunc. Etiam congue sed sem et imperdiet.';
+			break;
+		}
+	}
+	//add mailist
+	$scope.addEmailList = function()
+	{
+		var _this = $scope;
+		var email = _this.TxtEmail;
+		_this.AlertBox = false;_this.AlertClass = 'alert alert-warning';_this.AlertText = 'loading...';
+		if(!email)//no input email
+		{
+			_this.AlertBox = false;_this.AlertClass = 'alert alert-danger';_this.AlertText = 'email kosong';
 
+		}else//email processor
+		{
+			//save data
+			url = rootweb+'/ajax/addmail';
+			var ajax = $http.post(url,{email:email});
+			//success
+			ajax.success(function(response)
+				{
+					if(response=='success')
+					{
+						_this.AlertBox = false;_this.AlertClass = 'alert alert-success';_this.AlertText = 'email berhasil disimpan';
+						$timeout(function(){_this.AlertBox = true;_this.TxtEmail='';},3000);
+					}else{
+						_this.AlertBox = false;_this.AlertClass = 'alert alert-danger';_this.AlertText = response;
+					}
+				});
+			//error
+			ajax.error(function()
+				{
+					_this.AlertBox = false;_this.AlertClass = 'alert alert-danger';_this.AlertText = 'gagal menyimpan, silahkan ulangi lagi';
+					$timeout(function(){_this.AlertBox = true;_this.TxtEmail='';},3000);
+				});			
+		}
+		// alert(_this.TxtEmail);
+
+	};
+	//check TxtEmail input
+	$scope.checkInput = function()
+	{
+		var email = $scope.TxtEmail;
+		if(!email){$scope.AlertBox = true;}
+	};
+	//auto
+	$scope.homePresentation('personil')
+}])
 /**CASHIER CONTROLLER**/
 app.controller('ctrlKasir',['$scope','$http','$location','$window','$timeout',
 	function($scope,$http,$location,$window,$timeout){
@@ -44,40 +111,9 @@ app.controller('ctrlKasir',['$scope','$http','$location','$window','$timeout',
 		if(agree==true){alert('redirect');}
 	};
 
-	}]);
+}]);
 /**END OF KASIR CONTROLLER**/
 
-//HOME
-app.controller('ctrlHome', ['$scope','$timeout',function($scope,$timeout){
-	$scope.fixHeader = true;
-	$scope.homePresentation = function(param)
-	{
-		switch(param){
-			case 'personil':
-			$scope.downArrowPersonil = true;$scope.downArrowPenjualan = false;$scope.downArrowPersediaan = false;$scope.downArrowAkuntansi = false;
-			$scope.homeh2 = 'manajemen, dokumentasi dan merapikan aktifitas usaha.';
-			$scope.homep = 'Khusus diciptakan untuk UKM(Usaha Kecil Mikro dan Menengah) untuk mengatasi berbagai masalah di bidang personil,penjualan,persediaan dan akuntansi. Data tersimpan di cloud sehingga memudahkan semua personil untuk mengaksesnya.';
-			break;
-			case 'penjualan':
-			$scope.downArrowPersonil = false;$scope.downArrowPenjualan = true;$scope.downArrowPersediaan = false;$scope.downArrowAkuntansi = false;
-			$scope.homeh2 = 'membantu proses penjualan lebih rapi dan tercatat dengan baik.';
-			$scope.homep = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus, sapien ac imperdiet aliquam, felis nulla euismod risus, at consectetur ante est id nulla. Morbi bibendum, dui sit amet pulvinar venenatis, tellus ipsum feugiat erat, placerat lacinia dui lorem malesuada nunc. Etiam congue sed sem et imperdiet.';
-			break;
-			case 'persediaan':
-			$scope.downArrowPersonil = false;$scope.downArrowPenjualan = false;$scope.downArrowPersediaan = true;$scope.downArrowAkuntansi = false;
-			$scope.homeh2 = 'mengetahui persedian yang ada dan pemberitahuan untuk stok yang hampir habis.';
-			$scope.homep = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus, sapien ac imperdiet aliquam, felis nulla euismod risus, at consectetur ante est id nulla. Morbi bibendum, dui sit amet pulvinar venenatis, tellus ipsum feugiat erat, placerat lacinia dui lorem malesuada nunc. Etiam congue sed sem et imperdiet.';
-			break;
-			case 'akuntansi':
-			$scope.downArrowPersonil = false;$scope.downArrowPenjualan = false;$scope.downArrowPersediaan = false;$scope.downArrowAkuntansi = true;
-			$scope.homeh2 = 'memberikan laporan yang valid untuk menentukan rencana kedepan usaha anda.';
-			$scope.homep = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus, sapien ac imperdiet aliquam, felis nulla euismod risus, at consectetur ante est id nulla. Morbi bibendum, dui sit amet pulvinar venenatis, tellus ipsum feugiat erat, placerat lacinia dui lorem malesuada nunc. Etiam congue sed sem et imperdiet.';
-			break;
-		}
-	}
-	//auto
-	$scope.homePresentation('personil')
-}])
 //GET STARTED
 app.controller('ctrlGetStarted', ['$scope','$http','$window',function($scope,$http,$window){
 	//automatic hide
@@ -153,10 +189,10 @@ app.controller('ctrlUsaha',['$scope','$window','$http',
 			var url = rootweb+'/ajax/security/passwordchecker'; 
 			var ajax = $http.post(url,{password:password});
 			ajax.success(function(response)
-				{
-					$scope.loader = true;
-					$window.location = $scope.page;
-				});
+			{
+				$scope.loader = true;
+				$window.location = $scope.page;
+			});
 			ajax.error(function(){$scope.loader = true;alert('terjadi masalah');});
 		};
 	}]);
