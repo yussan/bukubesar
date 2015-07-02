@@ -25,11 +25,9 @@
                 <div class="col-xs-9"><h1>persediaan : Barang
                     <button ng-click="showAdd()" type="button" class="btn btn-default box-persediaan-btn"><span class="glyphicon glyphicon-plus"></span></button>
                     <button ng-click="showSearch()" type="button" class="btn btn-default box-persediaan-btn"><span class="glyphicon glyphicon-search"></span></button>
-                </h1> 
+                </h1>
             </div>
-            <div class="box-kasir-veryright col-xs-3">
-
-            </div>
+            <div class="box-kasir-veryright col-xs-3"></div>
             <form ng-submit="searchItems()" class="col-xs-12" ng-hide="search" role="form">
                 <div style="padding-left:0" class="col-xs-10">
                     <input ng-model="TxtKeyword" type="text" class="form-control" id="exampleInputEmail2" placeholder="Kode / Nama Barang" requried autofocus>
@@ -38,14 +36,14 @@
                     <button type="submit" class="btn btn-default box-persediaan-btn"><span class="glyphicon glyphicon-search"></span></button></div>
                 </form>
             </div>
-        </div>               
+        </div>
         <!-- LIST BARANG -->
         <br/>
         <div class="row">
             <div ng-style="styleItemList" class="parent-list">
                 <div class="">
                     <div class="col-sm-1">
-                        <li><strong>Tags</strong> 
+                        <li><strong>Tags</strong>
                             <button ng-click="showEditTags()" style="padding:1px 5px;color:gray" class="btn btn-circle btn-default btn-xs" href="#"><span class="glyphicon glyphicon-pencil"></span></button></li>
                         </div>
                         <div class="col-sm-11">
@@ -79,15 +77,15 @@
                             <td><strong>Stok</strong><br/>{{list.stok}}</td>
                             <td><strong>Rak</strong><br/>{{list.rak}}</td>
                             <td style="width:50px">
-                                <a ng-click="actDeleteItem(list.idItem)" style="padding:1px 5px" data-toggle="tooltip" data-placement="bottom" title="reset data transaksi" class="btn btn-circle btn-xs btn-danger" href="#"><span  class="glyphicon glyphicon-remove"></span></a> 
-                                <a ng-click="showUpdateItem()" style="padding:1px 5px" data-toggle="tooltip" data-placement="bottom" title="reset data transaksi" class="btn btn-circle btn-xs btn-default" href="#"><span style="color:gray" class="glyphicon glyphicon-pencil"></span></a> 
+                                <a ng-click="actDeleteItem(list.idItem)" style="padding:1px 5px" data-toggle="tooltip" data-placement="bottom" title="reset data transaksi" class="btn btn-circle btn-xs btn-danger" href="#"><span  class="glyphicon glyphicon-remove"></span></a>
+                                <a ng-click="showUpdateItem(list.idItem)" style="padding:1px 5px" data-toggle="tooltip" data-placement="bottom" title="reset data transaksi" class="btn btn-circle btn-xs btn-default" href="#"><span style="color:gray" class="glyphicon glyphicon-pencil"></span></a>
                                 <br/>
                             </td>
-                        </tr>  
+                        </tr>
                     </table>
                 </div>
             </div>
-        </div>           
+        </div>
         <!--HEADER-->
         <!-- MODAL ADD ITEM -->
         <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -99,21 +97,33 @@
             </div>
             <div class="modal-body">
                 <form ng-submit="actAddItem()">
-                    <label for="txtBarang">Nama Barang</label>
-                    <input class="form-control" id="txtBarang" type="text" placeholder="masukaNamaBarang">
+                    <label for="txtMerek">Nama Barang</label>
+                    <input class="form-control" id="txtMerek" ng-model="TxtMerek" type="text" placeholder="masukaNamaBarang" required>
                     <label for="txtKode">Nomor Seri</label>
-                    <input class="form-control" id="txtKode" type="text" placeholder="barcode atau nomor ptoduksi atau kosong">
+                    <input class="form-control" id="txtKode" ng-model="TxtKode" type="text" placeholder="barcode atau nomor ptoduksi atau kosong">
                     <label for="txtStok">Stok</label>
-                    <input class="form-control" id="txtStok" type="number" min="0" placeholder="barcode atau nomor ptoduksi atau kosong">
-                    <label for="txtKode">Untung (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-                    <input class="form-control" id="txtUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil">
-                    <label for="txtKode">Diskon (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-                    <input class="form-control" id="txtDiskon" type="text" min="0" max="100" placeholder="diskon untuk penjualan">
-                </form>
-            </div>
-            <div class="modal-footer">
-               <button ng-click="add()" type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-               <button ng-click="add()" type="button" class="btn btn-default box-persediaan-btn"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+                    <input class="form-control" id="txtStok" ng-model="TxtStok" type="number" min="0" placeholder="sisa barang di gudang" required>
+                    <label for="txtProduksi">Harga Produksi/Beli</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">Rp</div>
+                        <input class="form-control" id="txtProduksi" ng-model="TxtProduksi" type="number" min="0" placeholder="masukan harga produksi atau harga bli produk" required>
+                        <div class="input-group-addon">,00</div>
+                    </div>
+                    <br/>
+                    <label for="txtUntung">Untung (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
+                    <input class="form-control" id="txtUntung" ng-model="TxtUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil" required>
+                    <label for="txtDiskon">Diskon (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
+                    <input class="form-control" id="txtUntung" ng-model="TxtUDiskon" type="number" min="0" max="100" placeholder="presentase diskon/potongan harga" required>
+                    <label for="txtRak">Nomor Rak <small>jika terdapat pembagian rak, masukan kode raknya disebelah sini</small></label>
+                    <input class="form-control" id="txtRak" ng-model="TxtRak" type="text" placeholder="nomor rak">
+                    <label for="slcTag">tag</label>
+                    <select class="form-control">
+                        <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                   <button type="submit" class="btn btn-default box-persediaan-btn"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+               </form>
            </div>
        </div>
    </div>
@@ -121,32 +131,39 @@
 <!-- END OF MODAL ADD ITEM -->
 <!-- MODAL UPDATE ITEM -->
 <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div style="color:gray" class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Tambah Barang</h4>
-            </div>
-            <div class="modal-body">
-                <form ng-submit="actUpdateItem()">
-                    <label for="txtBarang">Nama Barang</label>
-                    <input class="form-control" id="txtUpdateBarang" type="text" placeholder="masukaNamaBarang">
-                    <label for="txtKode">Nomor Seri</label>
-                    <input class="form-control" id="txtUpdateKode" type="text" placeholder="barcode atau nomor ptoduksi atau kosong">
-                    <label for="txtStok">Stok</label>
-                    <input class="form-control" id="txtUpdateStok" type="number" min="0" placeholder="barcode atau nomor ptoduksi atau kosong">
-                    <label for="txtKode">Untung (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-                    <input class="form-control" id="txtUpdateUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil">
-                    <label for="txtKode">Diskon (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-                    <input class="form-control" id="txtUpdateDiskon" type="text" min="0" max="100" placeholder="diskon untuk penjualan">
-                </form>
-            </div>
-            <div class="modal-footer">
-               <button ng-click="add()" type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-               <button ng-click="add()" type="button" class="btn btn-default box-persediaan-btn"><span class="glyphicon glyphicon-floppy-disk"></span></button>
-           </div>
-       </div>
+  <div class="modal-dialog">
+    <div style="color:gray" class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tambah Barang</h4>
+    </div>
+    <div class="modal-body">
+        <form ng-submit="actUpdateItem(TxtUpdateIdItem)">
+            <label for="txtMerek">Nama Barang</label>
+            <input class="form-control" id="txtMerek" ng-model="TxtUpdateMerek" type="text" placeholder="masukaNamaBarang">
+            <label for="txtKode">Nomor Seri</label>
+            <input class="form-control" id="txtKode" ng-model="TxtUpdateKode" type="text" placeholder="barcode atau nomor ptoduksi atau kosong">
+            <label for="txtStok">Stok</label>
+            <input class="form-control" id="txtStok" ng-model="TxtUpdateStok" type="number" min="0" placeholder="sisa barang di gudang">
+            <label for="txtProduksi">Harga Produksi/Beli</label>
+            <input class="form-control" id="txtProduksi" ng-model="TxtUpdateProduksi" type="number" min="0" placeholder="masukan harga produksi atau harga bli produk" required>
+            <label for="txtUntung">Untung (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
+            <input class="form-control" id="txtUntung" ng-model="TxtUpdateUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil" required>
+            <label for="txtDiskon">Diskon (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
+            <input class="form-control" id="txtUntung" ng-model="TxtUpdateDiskon" type="number" min="0" max="100" placeholder="presentase diskon/potongan harga" required>
+            <label for="txtRak">Nomor Rak <small>jika terdapat pembagian rak, masukan kode raknya disebelah sini</small></label>
+            <input class="form-control" id="txtRak" ng-model="TxtUpdateRak" type="text" placeholder="nomor rak">
+            <label for="slcTag">tag</label>
+            <select ng-model="SlcTag" class="form-control">
+                <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+            </select>
+        </div>
+        <div class="modal-footer">
+           <button type="submit" class="btn btn-default box-persediaan-btn"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+       </form>
    </div>
+</div>
+</div>
 </div>
 <!-- END OF MODAL UPDATE ITEM -->
 </div>

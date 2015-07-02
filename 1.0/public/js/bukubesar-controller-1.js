@@ -59,7 +59,7 @@ app.controller('ctrlHome', ['$scope','$timeout','$http',function($scope,$timeout
 				{
 					_this.AlertBox = false;_this.AlertClass = 'alert alert-danger';_this.AlertText = 'gagal menyimpan, silahkan ulangi lagi';
 					$timeout(function(){_this.AlertBox = true;_this.TxtEmail='';},3000);
-				});			
+				});
 		}
 		// alert(_this.TxtEmail);
 
@@ -177,7 +177,7 @@ app.controller('ctrlUsaha',['$scope','$window','$http',
 		};
 		//GOTO SECURE PAGE
 		$scope.securePage = function(location)
-		{	
+		{
 			$scope.page = location;
 			$('#securePageModal').modal('show');
 		};
@@ -186,7 +186,7 @@ app.controller('ctrlUsaha',['$scope','$window','$http',
 		{
 			$scope.loader = false;
 			var password = $scope.password;
-			var url = rootweb+'/ajax/security/passwordchecker'; 
+			var url = rootweb+'/ajax/security/passwordchecker';
 			var ajax = $http.post(url,{password:password});
 			ajax.success(function(response)
 			{

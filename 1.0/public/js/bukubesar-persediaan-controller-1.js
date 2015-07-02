@@ -12,8 +12,8 @@ app.controller('ctrlPersediaanBarang',['$scope','$window','$http',
             //get latest tags
             var url = rootweb+'/ajax/persediaan/getTags';
             var ajax = $http.post(url,{idusaha:idusaha});
-            ajax.success(function(response){$scope.tags = response;$scope.$apply;});            
-            ajax.error(function(response){alert('terjadi masalah');});            
+            ajax.success(function(response){$scope.tags = response;$scope.$apply;});
+            ajax.error(function(response){alert('terjadi masalah');});
         }
         //GET ITEMS
         $scope.getItems = function(tag)
@@ -58,9 +58,31 @@ app.controller('ctrlPersediaanBarang',['$scope','$window','$http',
             $('#modalTambah').modal('show');
         };
         //SHOW - UPDATE ITEM
-        $scope.showUpdateItem = function()
+        $scope.showUpdateItem = function(iditem)
         {
+            // get data
+            var url = rootweb+'/ajax/persediaan/item';
+            var ajax = $http.post(url,{iditem:iditem});
+            ajax.success(function(response)
+            {
+              console.log(response);
+              $scope.TxtUpdateMerek = response.merek;
+              $scope.TxtUpdateKode = response.kodeBarang;
+              $scope.TxtUpdateStok = parseInt(response.stok);
+              $scope.TxtUpdateProduksi = parseInt(response.hargaProduksi);
+              $scope.TxtUpdateUntung = parseInt(response.untung);
+              $scope.TxtUpdateDiskon = parseInt(response.diskon);
+              $scope.TxtUpdateRak = response.rak;
+              $scope.TxtUpdateIdItem = response.idItem;
+              $scope.SlcTag = response.tag;
+            });
+            ajax.error(function(){alert('gagal akses data item')});
             $('#modalUpdate').modal('show');
+        };
+        //PROCESS - ADD ITEM
+        $scope.actAddItem = function()
+        {
+            
         };
         //PROCESS - UPDATE ITEM
         $scope.actUpdateItem = function()

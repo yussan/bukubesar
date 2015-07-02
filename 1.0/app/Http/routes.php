@@ -27,6 +27,7 @@ Route::get('ajax/personil/search','AjaxController@personilSearch');//set session
 Route::post('ajax/personil/showbagian','AjaxController@personilBagian');//show modal untuk set bagian
 Route::post('ajax/personil/ubahstatus','AjaxController@personilBagian');//ubah status personil
 #AJAX FOR PERSEDIAAN
+Route::post('ajax/persediaan/item','AjaxController@persediaanItem');//get detail item, by idItem
 Route::post('ajax/persediaan/list','AjaxController@persediaanList');//get list item
 Route::post('ajax/persediaan/addTags','AjaxController@persediaanAddTags');//add tags
 Route::post('ajax/persediaan/getTags','AjaxController@persediaanGetTags');//get latest tags

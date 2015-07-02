@@ -10,4 +10,5 @@
         <dd><a href="#"><span class="glyphicon glyphicon-circle-arrow-right"></span> Barang</a></dd>
         <dd><a href="#"><span class="glyphicon glyphicon-circle-arrow-right"></span> Riwayat Pasokan</a></dd>
     </dl>
+    <dd style="position:absolute;bottom:0"><a href="#"><span class="glyphicon glyphicon-alert"></span> Laporkan masalah</a></dd>
 </dl>

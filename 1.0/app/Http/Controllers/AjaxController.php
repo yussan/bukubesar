@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
 use DB;use Session;
 use App\Models\User;use App\Models\Usaha;use App\Models\Item;use App\Models\Personil;
@@ -6,7 +6,7 @@ class AjaxController extends BaseController {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 	}
 	//LOGIN VERIFICATION
 	public function loginverification()
@@ -61,7 +61,17 @@ class AjaxController extends BaseController {
 		endif;
 	}
 	/***PENJUALAN***/
+
 	/***PERSEDIAAN***/
+	#GET DETAIL ITEM BY ID ITEM
+	public function persediaanItem()
+	{
+		$postdata = file_get_contents("php://input");
+		$data = json_decode($postdata);
+		$iditem = $data->iditem;
+		$query = DB::table('item')->where('idItem',$iditem)->get();
+		return json_encode($query[0]);//get item
+	}
 	#PERSEDIAAN LIST
 	public function persediaanList()
 	{
