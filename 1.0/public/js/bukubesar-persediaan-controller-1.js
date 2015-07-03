@@ -74,7 +74,7 @@ app.controller('ctrlPersediaanBarang',['$scope','$window','$http',
               $scope.TxtUpdateDiskon = parseInt(response.diskon);
               $scope.TxtUpdateRak = response.rak;
               $scope.TxtUpdateIdItem = response.idItem;
-              $scope.SlcTag = response.tag;
+              $scope.SlcUpdateTag = response.tagItem;
             });
             ajax.error(function(){alert('gagal akses data item')});
             $('#modalUpdate').modal('show');
@@ -82,12 +82,48 @@ app.controller('ctrlPersediaanBarang',['$scope','$window','$http',
         //PROCESS - ADD ITEM
         $scope.actAddItem = function()
         {
-            
+            var _new = $scope;
+            var Barang = {"idUsaha":idusaha,"kodeBarang":_new.TxtKode,"merek":_new.TxtMerek,
+            "tagItem":_new.SlcTag,"stok":_new.TxtStok,"hargaProduksi":_new.TxtProduksi,
+            "untung":_new.TxtUntung,"diskon":_new.TxtDiskon,"rak":_new.TxtRak};
+            console.log(Barang);
+            //clear item
+            //send to db
+            var url = rootweb+'/ajax/persediaan/additem';
+            var ajax = $http.put(url,{barang:Barang});
+            ajax.success(function(response){
+                if(response == 'success')
+                {
+                    $scope.$apply;
+                    alert('item berhasil ditambah');
+                    //reseting form
+                    $scope.SlcUntung = $scope.TxtKode = $scope.TxtMerek = $scope.TxtStok = $scope.TxtProduksi = $scope.TxtUntung = $scope.TxtDiskon = $scope.TxtRak = '';
+                    //
+                }
+                else
+                {
+                    alert('terjadi kesalahan');
+                }
+            });
+            ajax.error(function(response){console.log(response)});
         };
         //PROCESS - UPDATE ITEM
-        $scope.actUpdateItem = function()
+        $scope.actUpdateItem = function(iditem)
         {
-
+            var _update = $scope;
+            var Barang = {"idItem":iditem,"kodeBarang":_update.TxtUpdateKode,"merek":_update.TxtUpdateMerek,
+            "tagItem":_update.SlcUpdateTag,"stok":_update.TxtUpdateStok,"hargaProduksi":_update.TxtUpdateProduksi,
+            "untung":_update.TxtUpdateUntung,"diskon":_update.TxtUpdateDiskon,"rak":_update.TxtUpdateRak};
+            console.log(Barang);
+            //process update database
+            var url = rootweb+'/ajax/persediaan/updateitem';
+            var ajax = $http.patch(url,{barang:Barang});
+            ajax.success(function(response)
+                {
+                    if(response=='success'){alert('data berhasil diupdate');}
+                    else{alert('terjadi masalah');}
+                });
+            ajax.error(function(data, status, headers, config){alert('terjadi masalah');console.log({data:data,status:status,headers:headers,config:config});})
         };
         //PROCESS - DELETE ITEM
         $scope.actDeleteItem = function(iditem)

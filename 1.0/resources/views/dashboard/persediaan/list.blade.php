@@ -98,26 +98,34 @@
             <div class="modal-body">
                 <form ng-submit="actAddItem()">
                     <label for="txtMerek">Nama Barang</label>
-                    <input class="form-control" id="txtMerek" ng-model="TxtMerek" type="text" placeholder="masukaNamaBarang" required>
+                    <input class="form-control" id="txtMerek" ng-model="TxtMerek" type="text" placeholder="Masukan NamaBarang" required>
                     <label for="txtKode">Nomor Seri</label>
                     <input class="form-control" id="txtKode" ng-model="TxtKode" type="text" placeholder="barcode atau nomor ptoduksi atau kosong">
                     <label for="txtStok">Stok</label>
                     <input class="form-control" id="txtStok" ng-model="TxtStok" type="number" min="0" placeholder="sisa barang di gudang" required>
                     <label for="txtProduksi">Harga Produksi/Beli</label>
-                    <div class="input-group">
+                    <div style="width:350px" class="input-group">
                         <div class="input-group-addon">Rp</div>
                         <input class="form-control" id="txtProduksi" ng-model="TxtProduksi" type="number" min="0" placeholder="masukan harga produksi atau harga bli produk" required>
                         <div class="input-group-addon">,00</div>
                     </div>
                     <br/>
                     <label for="txtUntung">Untung (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-                    <input class="form-control" id="txtUntung" ng-model="TxtUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil" required>
+                    <div style="width:350px" class="input-group">
+                        <input class="form-control" id="txtUntung" ng-model="TxtUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil" required>
+                        <div class="input-group-addon">%</div>
+                    </div>
+                    <br/>
                     <label for="txtDiskon">Diskon (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-                    <input class="form-control" id="txtUntung" ng-model="TxtUDiskon" type="number" min="0" max="100" placeholder="presentase diskon/potongan harga" required>
+                    <div style="width:350px" class="input-group">
+                        <input class="form-control" id="txtDiskon" ng-model="TxtDiskon" type="number" min="0" max="100" placeholder="presentase diskon/potongan harga" required>
+                        <div class="input-group-addon">%</div>
+                    </div>
+                    <br/>
                     <label for="txtRak">Nomor Rak <small>jika terdapat pembagian rak, masukan kode raknya disebelah sini</small></label>
                     <input class="form-control" id="txtRak" ng-model="TxtRak" type="text" placeholder="nomor rak">
                     <label for="slcTag">tag</label>
-                    <select class="form-control">
+                    <select ng-model="SlcTag" class="form-control">
                         <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
                     </select>
                 </div>
@@ -140,21 +148,34 @@
     <div class="modal-body">
         <form ng-submit="actUpdateItem(TxtUpdateIdItem)">
             <label for="txtMerek">Nama Barang</label>
-            <input class="form-control" id="txtMerek" ng-model="TxtUpdateMerek" type="text" placeholder="masukaNamaBarang">
+            <input class="form-control" id="txtMerek" ng-model="TxtUpdateMerek" type="text" placeholder="Masukan Nama Barang">
             <label for="txtKode">Nomor Seri</label>
             <input class="form-control" id="txtKode" ng-model="TxtUpdateKode" type="text" placeholder="barcode atau nomor ptoduksi atau kosong">
             <label for="txtStok">Stok</label>
             <input class="form-control" id="txtStok" ng-model="TxtUpdateStok" type="number" min="0" placeholder="sisa barang di gudang">
             <label for="txtProduksi">Harga Produksi/Beli</label>
-            <input class="form-control" id="txtProduksi" ng-model="TxtUpdateProduksi" type="number" min="0" placeholder="masukan harga produksi atau harga bli produk" required>
+            <div style="width:350px" class="input-group">
+                <div class="input-group-addon">Rp</div>
+                <input class="form-control" id="txtProduksi" ng-model="TxtUpdateProduksi" type="number" min="0" placeholder="masukan harga produksi atau harga bli produk" required>
+                <div class="input-group-addon">,00</div>
+            </div>
+            <br/>
             <label for="txtUntung">Untung (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-            <input class="form-control" id="txtUntung" ng-model="TxtUpdateUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil" required>
+            <div style="width:350px" class="input-group">
+                <input class="form-control" id="txtUntung" ng-model="TxtUpdateUntung" type="number" min="0" max="100" placeholder="presentasi keuntungan yang diambil" required>
+                <div class="input-group-addon">%</div>
+            </div>
+            <br/>
             <label for="txtDiskon">Diskon (%) <small>masukan angka 0-100 tanpa tanda '%'</small></label>
-            <input class="form-control" id="txtUntung" ng-model="TxtUpdateDiskon" type="number" min="0" max="100" placeholder="presentase diskon/potongan harga" required>
+            <div style="width:350px" class="input-group">
+                <input class="form-control" id="txtDiskon" ng-model="TxtUpdateDiskon" type="number" min="0" max="100" placeholder="presentase diskon/potongan harga" required>
+                <div class="input-group-addon">%</div>
+            </div>
+            <br/>
             <label for="txtRak">Nomor Rak <small>jika terdapat pembagian rak, masukan kode raknya disebelah sini</small></label>
             <input class="form-control" id="txtRak" ng-model="TxtUpdateRak" type="text" placeholder="nomor rak">
             <label for="slcTag">tag</label>
-            <select ng-model="SlcTag" class="form-control">
+            <select ng-model="SlcUpdateTag" class="form-control">
                 <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
             </select>
         </div>

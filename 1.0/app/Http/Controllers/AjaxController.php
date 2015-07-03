@@ -63,6 +63,30 @@ class AjaxController extends BaseController {
 	/***PENJUALAN***/
 
 	/***PERSEDIAAN***/
+	#ADD NEW ITEM
+	public function persediaanAddItem()
+	{
+		$postdata = file_get_contents("php://input");
+		$data = json_decode($postdata,true);//decoded as array
+		$barang = $data['barang'];
+		$barang['updateItem'] = date('Y-m-d H:i:s');
+		// print_r($barang);
+		//insert data to the database
+		return $this->M_persediaan->addItem($barang);
+	}
+	#UPDATE AN ITEM
+	public function persediaanUpdateItem()
+	{
+		$postdata = file_get_contents("php://input");
+		$data = json_decode($postdata,true);//decoded as array
+		$barang = $data['barang'];
+		$iditem = $barang['idItem'];
+		unset($barang['idItem']);
+		// print_r($barang);
+		$barang['updateItem'] = date('Y-m-d H:i:s');
+		if(!empty($iditem))return $this->M_persediaan->updateItem($barang,$iditem);//update database item
+		else return $note = 'error';
+	}
 	#GET DETAIL ITEM BY ID ITEM
 	public function persediaanItem()
 	{

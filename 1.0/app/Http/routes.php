@@ -14,7 +14,26 @@ Route::group(['prefix' => 'accounts/{username}'], function()
         //available soon
     });
 });
+// Route::post('ajax/{segment}/{action}',function($segment,$action,$uses)
+// 	{
+// 		switch ($segment) {
+// 			case 'persediaan':
+// 				switch ($action) {
+// 					case 'list':
+// 						$uses = 'AjaxController@persediaanList';
+// 						break;
+// 					default:
+// 						abort(404);
+// 						break;
+// 				}
+// 				break;
+// 			default:
+// 				abort(404);
+// 				break;
+// 		}
+// 	});
 //password checker
+//PHP API
 Route::post('ajax/security/passwordchecker','AjaxController@checkPassword');//check password when go to secure page
 Route::post('ajax/loginverification','AjaxController@loginverification');//login verification
 Route::post('ajax/setsession','AjaxController@setsession');//set session
@@ -33,6 +52,8 @@ Route::post('ajax/persediaan/addTags','AjaxController@persediaanAddTags');//add 
 Route::post('ajax/persediaan/getTags','AjaxController@persediaanGetTags');//get latest tags
 Route::post('ajax/persediaan/search','AjaxController@persediaanSearch');//search item
 Route::post('ajax/persediaan/processItem','AjaxController@persediaanProcItem');//CRUD an item
+Route::put('ajax/persediaan/additem','AjaxController@persediaanAddItem');//add new item
+Route::patch('ajax/persediaan/updateitem','AjaxController@persediaanUpdateitem');//update an item
 #AJAX FOR ADMIN
 
 #PAGE FOR PUBLIC
